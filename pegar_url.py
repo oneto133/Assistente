@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
-from IA.Funções import csv
+from Funções import csv
 
 class Scraping:
     def __init__(self, link="https://www.google.com/finance/quote/PETR4:BVMF"):

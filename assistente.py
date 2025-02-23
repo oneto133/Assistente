@@ -13,6 +13,7 @@ class assistente(AI):
                 resposta = self.responder(pergunta=ia[1], arquivo=r"pkl/comandos_ia.pkl")
                 print(resposta[0])
                 self.executar(str(resposta[0]))
+                self.Verificar_resposta() 
         except:
             pass
 
@@ -38,5 +39,9 @@ class assistente(AI):
         excel()
         print("executado")
 
+    def encerrar(self):
+        print("Encerrando...")
+        raise KeyboardInterrupt
+
 if __name__ == "__main__":
-    assistente()
+    assistente() 

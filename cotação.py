@@ -30,7 +30,7 @@ class conexão (csv, Tratamento_de_strings, Tempo, moeda):
                 continue
             else:
                 self.ultimo.append(lista_de_ticker[cont])
-                tipo = self.tipo(r"cotacao/csv/url.csv", "url", lista_de_url[cont], "cod")
+                tipo = self.tipo(r"csv/url.csv", "url", lista_de_url[cont], "cod")
                 self.main(lista_de_url[cont], str(tipo), lista_de_ticker[cont])
                 cont += 1
             
@@ -66,14 +66,14 @@ class conexão (csv, Tratamento_de_strings, Tempo, moeda):
                         self.ultimo_preço = self.tratar_dados_de_url(variação_do_preço[0])
                 parametros = [-1, 2, 3]
                 if str(tipo) in parametros and show == True:
-                    with open(r"cotacao/pkl/parametros.pkl", "rb") as file:
+                    with open(r"pkl/parametros.pkl", "rb") as file:
                         parametros = cloudpickle.load(file)
                     print(parametros[tipo](cotação=self.cotação, código=self.código,
                                            variações=self.variações, rendimento_atual=self.rendimento,
                                            equivalente=self.equivalente))
                 self.escrever_csv(conteudo=(f'"{self.código}", "{self.cotação}",'
                                            f'"{self.hora_atual()}", "{self.data_atual()}", "{self.variações}"'),
-                                 nome=r"cotacao/csv/dados_das_cotações.csv", tipo="a"
+                                 nome=r"csv/dados_das_cotações.csv", tipo="a"
                                            )
                 
         except (ValueError, TypeError) as e:
@@ -100,7 +100,7 @@ class main(Tempo):
             print(hora)
             if int(hora[:2]) < 10 or int(hora[:2]) >= 18:
                 if int(hora[:2]) >=18 and int(hora[:2]) <= 22:
-                    df = pd.read_csv(r"cotacao/csv/indice.csv", encoding="latin1")
+                    df = pd.read_csv(r"csv/indice.csv", encoding="latin1")
                     data = df.columns[1]
                     Hor = Tempo()
                     dat = Hor.data_atual()
