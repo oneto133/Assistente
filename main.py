@@ -10,7 +10,7 @@ class AI():
     def __init__(self):
         super().__init__()
 
-    def diálogo(self):
+    def diálogo(self, pergunta):
         """
         Como se trata do código principal, não há atributos inicialmente, pois
         o código vai se moldando conforme o laço de repetição está funcionando.
@@ -33,23 +33,21 @@ class AI():
         """
         evento = {}
         try:
-            while True:
-                pergunta = input("Você: ")
-                resposta, probabilidade = self.responder(pergunta)
+            resposta, probabilidade = self.responder(pergunta)
 
-                if probabilidade < 0.00530:
-                    return "low", pergunta
+            if probabilidade < 0.00530:
+                return "low", pergunta
+            else:
+                if resposta == "O que você não entendeu?":
+                    print(f"IA: {resposta}\nVocê me perguntou '{evento['usuário']}' \nE eu respondi \n'{evento['IA']}'\n"
+                    "Fique a vontade para tirar suas dúvidas")
                 else:
-                    if resposta == "O que você não entendeu?":
-                        print(f"IA: {resposta}\nVocê me perguntou '{evento['usuário']}' \nE eu respondi \n'{evento['IA']}'\n"
-                        "Fique a vontade para tirar suas dúvidas")
-                    else:
-                        evento.clear()
-                        evento['usuário'] = pergunta
-                        evento['IA'] = resposta
-                        print("IA: ", resposta)
-                        print(probabilidade)
-                        enviar_mensagem(titulo="Teste IA", mensagem=resposta, mensagem_final="")
+                    evento.clear()
+                    evento['usuário'] = pergunta
+                    evento['IA'] = resposta
+                    print("IA: ", resposta)
+                    print(probabilidade)
+                    enviar_mensagem(titulo="Teste IA", mensagem=resposta, mensagem_final="")
         except Exception as e:
             print(e)
                     

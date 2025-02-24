@@ -27,7 +27,7 @@ def autenticar_gmail():
         with open(r'C:\Users\rodri\Downloads\token.pickle', 'wb') as token:
             pickle.dump(creds, token)
     return build('gmail', 'v1', credentials=creds)
-
+ 
 def listar_mensagens():
     """
     Depois de feita a autenticação, o programa busca as ultimas mensagens da caixa de entrada
@@ -44,16 +44,27 @@ def listar_mensagens():
         messages = results.get('messages', [])
 
         if not messages:
-            print("Nenhuma mensagem encontrada.")
+            return("Nenhuma mensagem encontrada.")
         else:
-            print("Mensagens:")
             for message in messages:
                 msg = service.users().messages().get(userId='me', id=message['id']).execute()
-                print(f"- Assunto: {msg['snippet']}")
+                headers = msg['payload']['headers']
+                remetente = None
+                for header in headers:
+                    if header['name'] == 'From':
+                        remetente = header['value']
+                        break
+                if remetente == "Neto Rodrigues <allmyfilesondrive@gmail.com>":
+                    mensagem = msg['snippet']
+                    break
+            return mensagem
+            
     except Exception as e:
-        import traceback
+        pass
+        """import traceback
         t = traceback.format_exc()
-        print(f"Erro ao listar mensagens: {e}", t)
+        print(f"Erro ao listar mensagens: {e}", t)"""
 
 if __name__ == '__main__':
-    listar_mensagens()
+    print(listar_mensagens())
+ 

@@ -64,13 +64,6 @@ class conexão (csv, Tratamento_de_strings, Tempo, moeda):
                         self.rendimento = self.tratar_dados_de_url(rendimentos)
                         self.equivalente = self.tratar_valores_url(cotação, rendimentos)
                         self.ultimo_preço = self.tratar_dados_de_url(variação_do_preço[0])
-                parametros = [-1, 2, 3]
-                if str(tipo) in parametros and show == True:
-                    with open(r"pkl/parametros.pkl", "rb") as file:
-                        parametros = cloudpickle.load(file)
-                    print(parametros[tipo](cotação=self.cotação, código=self.código,
-                                           variações=self.variações, rendimento_atual=self.rendimento,
-                                           equivalente=self.equivalente))
                 self.escrever_csv(conteudo=(f'"{self.código}", "{self.cotação}",'
                                            f'"{self.hora_atual()}", "{self.data_atual()}", "{self.variações}"'),
                                  nome=r"csv/dados_das_cotações.csv", tipo="a"
