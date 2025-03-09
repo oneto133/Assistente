@@ -60,10 +60,9 @@ def listar_mensagens():
             return mensagem
             
     except Exception as e:
-        pass
-        """import traceback
+        import traceback
         t = traceback.format_exc()
-        print(f"Erro ao listar mensagens: {e}", t)"""
+        print(f"Erro ao listar mensagens: {e}", t)
 
 if __name__ == '__main__':
     print(listar_mensagens())

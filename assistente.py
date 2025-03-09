@@ -6,6 +6,7 @@ import threading
 import os
 from receber_email import listar_mensagens
 from enviar_email import enviar_mensagem
+
 def run_async(coroutine):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
@@ -72,4 +73,9 @@ class assistente(AI, Programa):
         return "Inicio de obtenção de dados de cotação..."
 
 if __name__ == "__main__":
-    assistente() 
+    try:
+        assistente() 
+    except KeyboardInterrupt:
+            print("Programa finalizado pelo usuário...")
+    except Exception as e:
+        print("Erro inesperado... ", e)

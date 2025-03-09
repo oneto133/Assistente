@@ -5,8 +5,6 @@ import win32com.client as win32
 import sys
 from Funções import Tempo, Arquivo
 
-
-
 class main(Tempo, Arquivo):
     def __init__(self):
         super().__init__()
@@ -59,7 +57,6 @@ class main(Tempo, Arquivo):
 
         base.save(r"C:\Users\rodri\OneDrive\Banco Gênio\Base.xlsx")
         self.excluir(self.destino)
-
 
 if __name__ == "__main__":
     df = pd.read_csv(r"csv/indice.csv", encoding="latin1")
