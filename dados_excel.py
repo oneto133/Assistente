@@ -38,7 +38,7 @@ class main(Tempo, Arquivo):
         coluna_destino = 1
         Financeiro = arq["Financeiro"]
         Banco_de_dados = base["Base"]
-        Intervalo = ["A5:G5", "J6:Q6"]
+        Intervalo = ["A5:G5", "J6:T6"]
         Dados = []
 
         for intervalo in Intervalo:
@@ -67,3 +67,6 @@ if __name__ == "__main__":
         main()
     else:
         print("Não executado!")
+        res = input("Deseja continuar o programa assim mesmo?")
+        if res[0] == "s":
+            main()

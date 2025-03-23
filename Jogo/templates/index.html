@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jogo de Cassino</title>
+</head>
+<body>
+    <h1>Jogo de Cassino</h1>
+    <form method="POST">
+        <label for="valor_aposta">Valor da aposta:</label>
+        <input type="number" name="valor_aposta" id="valor_aposta" required>
+        <button type="submit">Jogar</button>
+    </form>
+
+    {% if resultado %}
+        <p>{{ resultado.mensagem }}</p>
+        <p>Números: {{ resultado.numeros }}</p>
+        <p>Saldo: {{ resultado.saldo }}</p>
+    {% endif %}
+</body>
+</html>
