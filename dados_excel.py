@@ -15,7 +15,7 @@ class main(Tempo, Arquivo):
 
     def arquivos(self):
         try:
-            df = pd.read_csv(r'csv/indice.csv')
+            df = pd.read_csv(r'C:\Users\rodri\Assistente\csv\indice.csv')
             shutil.copy2(self.origem, self.destino)
             arq = openpyxl.load_workbook(self.destino, data_only=True)
             base = openpyxl.load_workbook(self.base)
@@ -38,7 +38,7 @@ class main(Tempo, Arquivo):
         coluna_destino = 1
         Financeiro = arq["Financeiro"]
         Banco_de_dados = base["Base"]
-        Intervalo = ["A5:G5", "J6:T6"]
+        Intervalo = ["A5:G5", "J6:U6"]
         Dados = []
 
         for intervalo in Intervalo:
@@ -52,14 +52,14 @@ class main(Tempo, Arquivo):
         Banco_de_dados.cell(row=linha_destino, column=coluna+2, value=self.data_atual())
         Banco_de_dados.cell(row=linha_destino, column=coluna+3, value=self.hora_atual())
 
-        with open(r"csv/indice.csv", "w") as file:
+        with open(r"C:\Users\rodri\Assistente\csv\indice.csv", "w") as file:
             file.write(f'"{linha_destino+1}",{self.data_atual()},{self.hora_atual()}')
 
         base.save(r"C:\Users\rodri\OneDrive\Banco Gênio\Base.xlsx")
         self.excluir(self.destino)
 
 if __name__ == "__main__":
-    df = pd.read_csv(r"csv/indice.csv", encoding="latin1")
+    df = pd.read_csv(r"C:\Users\rodri\Assistente\csv\indice.csv", encoding="latin1")
     data = df.columns[1]
     Hor = Tempo()
     dat = Hor.data_atual()

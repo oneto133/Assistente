@@ -18,12 +18,12 @@ class main():
     def jogo(self):
         user = input("Welcome! press Enter to start game: ")
         print("""O Objetivo do jogo é realizar 3 cobinações perfeitas, no inicio do jogo\n
-              você irá definir de quanto em quanto você quer apostar, conforme você for ganhando\n
-              o seu saldo será acrescentadoe se perder, será subtraído, caso o seu saldo zere\n
-              não será mais possível realizar jogadas até que um valor seja adicionado\n\n\n
-              Divirta-se!""")
+você irá definir de quanto em quanto você quer apostar, conforme você for ganhando\n
+o seu saldo será acrescentadoe se perder, será subtraído, caso o seu saldo zere\n
+não será mais possível realizar jogadas até que um valor seja adicionado\n\n\n
+Divirta-se!""")
         
-        valor = float(input(f"Seu saldo é {self.saldo.verificar()}\n"
+        valor = float(input(f"Seu saldo é {float(self.saldo.verificar()):.2f}\n"
         "Escolha o valor da sua aposta: "))
 
         while valor > float(self.saldo.verificar()):
@@ -41,12 +41,17 @@ class main():
             numero = self.numeros()
             print(numero)
             if numero[0] == numero[1] and numero[1] == numero[2]:
-                print(f"+{valor*4}")
-                valor = float(self.saldo.verificar()) + float(valor*4)
+                print(f"+{valor*3}")
+                valor = float(self.saldo.verificar()) + float(valor*3)
                 self.saldo.alterar(valor)
-                valor = float(casa) - float(user[0])*4
+                valor = float(casa) - float(user[0])*3
                 self.saldo.alterar(valor=valor, arq="csv/casa.csv")
-
+            elif int(numero[0]) == 1 and int(numero[1]) == 2 and int(numero[2]) == 3:
+                print(f"+{valor*2}")
+                valor = float(self.saldo.verificar()) + float(valor*2)
+                self.saldo.alterar(valor)
+                valor = float(casa) - float(user[0])*2
+                self.saldo.alterar(valor=valor, arq="csv/casa.csv")
             
             else:
                 print("-{valor}".format(valor=valor))
@@ -55,7 +60,7 @@ class main():
                 valor = float(casa) + float(user[0])
                 self.saldo.alterar(valor=valor, arq="csv/casa.csv")
 
-            print("Seu saldo é {}".format(self.saldo.verificar()))
+            print(f"Seu saldo é {float(self.saldo.verificar()):.2f}")
             jogo = input("")
             
     def numeros(self):
@@ -65,7 +70,6 @@ class main():
 
         return numero1, numero2, numero3
 class Saldo():
-    
     def verificar(self, arq="csv/saldo.csv"):
         try:
             arq = pd.read_csv(arq, encoding = "latin1")
